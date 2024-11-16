@@ -270,6 +270,8 @@ private:
 
 	/* HDDAGI */
 
+	RID hddagi_null_img;
+
 	struct HDDAGIShader {
 		enum HDDAGIPreprocessShaderVersion {
 			PRE_PROCESS_REGION_STORE,
