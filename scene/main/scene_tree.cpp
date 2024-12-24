@@ -296,7 +296,7 @@ void SceneTree::call_group_flagsp(uint32_t p_call_flags, const StringName &p_gro
 			if (!(p_call_flags & GROUP_CALL_DEFERRED)) {
 				Callable::CallError ce;
 				node->callp(p_function, p_args, p_argcount, ce);
-				if (unlikely(ce.error != Callable::CallError::CALL_OK && ce.error != Callable::CallError::CALL_ERROR_INVALID_METHOD)) {
+				if (ce.error != Callable::CallError::CALL_OK && ce.error != Callable::CallError::CALL_ERROR_INVALID_METHOD) [[unlikely]] {
 					ERR_PRINT(vformat("Error calling group method on node \"%s\": %s.", node->get_name(), Variant::get_callable_error_text(Callable(node, p_function), p_args, p_argcount, ce)));
 				}
 			} else {
@@ -314,7 +314,7 @@ void SceneTree::call_group_flagsp(uint32_t p_call_flags, const StringName &p_gro
 			if (!(p_call_flags & GROUP_CALL_DEFERRED)) {
 				Callable::CallError ce;
 				node->callp(p_function, p_args, p_argcount, ce);
-				if (unlikely(ce.error != Callable::CallError::CALL_OK && ce.error != Callable::CallError::CALL_ERROR_INVALID_METHOD)) {
+				if (ce.error != Callable::CallError::CALL_OK && ce.error != Callable::CallError::CALL_ERROR_INVALID_METHOD) [[unlikely]] {
 					ERR_PRINT(vformat("Error calling group method on node \"%s\": %s.", node->get_name(), Variant::get_callable_error_text(Callable(node, p_function), p_args, p_argcount, ce)));
 				}
 			} else {
@@ -583,7 +583,7 @@ bool SceneTree::process(double p_time) {
 
 	_flush_delete_queue();
 
-	if (unlikely(pending_new_scene)) {
+	if (pending_new_scene) [[unlikely]] {
 		_flush_scene_change();
 	}
 

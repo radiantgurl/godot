@@ -52,12 +52,12 @@ JPH::ShapeRefC JoltShapedObject3D::_try_build_shape() {
 		}
 	}
 
-	if (unlikely(built_shapes == 0)) {
+	if (built_shapes == 0) [[unlikely]] {
 		return nullptr;
 	}
 
 	JPH::ShapeRefC result = built_shapes == 1 ? _try_build_single_shape() : _try_build_compound_shape();
-	if (unlikely(result == nullptr)) {
+	if (result == nullptr) [[unlikely]] {
 		return nullptr;
 	}
 

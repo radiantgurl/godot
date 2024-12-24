@@ -71,7 +71,7 @@ void StringName::cleanup() {
 	MutexLock lock(mutex);
 
 #ifdef DEBUG_ENABLED
-	if (unlikely(debug_stringname)) {
+	if (debug_stringname) [[unlikely]] {
 		Vector<_Data *> data;
 		for (int i = 0; i < STRING_TABLE_LEN; i++) {
 			_Data *d = _table[i];
@@ -275,7 +275,7 @@ StringName::StringName(const char *p_name, bool p_static) {
 			_data->static_count.increment();
 		}
 #ifdef DEBUG_ENABLED
-		if (unlikely(debug_stringname)) {
+		if (debug_stringname) [[unlikely]] {
 			_data->debug_references++;
 		}
 #endif
@@ -293,7 +293,7 @@ StringName::StringName(const char *p_name, bool p_static) {
 	_data->prev = nullptr;
 
 #ifdef DEBUG_ENABLED
-	if (unlikely(debug_stringname)) {
+	if (debug_stringname) [[unlikely]] {
 		// Keep in memory, force static.
 		_data->refcount.ref();
 		_data->static_count.increment();
@@ -334,7 +334,7 @@ StringName::StringName(const StaticCString &p_static_string, bool p_static) {
 			_data->static_count.increment();
 		}
 #ifdef DEBUG_ENABLED
-		if (unlikely(debug_stringname)) {
+		if (debug_stringname) [[unlikely]] {
 			_data->debug_references++;
 		}
 #endif
@@ -351,7 +351,7 @@ StringName::StringName(const StaticCString &p_static_string, bool p_static) {
 	_data->next = _table[idx];
 	_data->prev = nullptr;
 #ifdef DEBUG_ENABLED
-	if (unlikely(debug_stringname)) {
+	if (debug_stringname) [[unlikely]] {
 		// Keep in memory, force static.
 		_data->refcount.ref();
 		_data->static_count.increment();
@@ -392,7 +392,7 @@ StringName::StringName(const String &p_name, bool p_static) {
 			_data->static_count.increment();
 		}
 #ifdef DEBUG_ENABLED
-		if (unlikely(debug_stringname)) {
+		if (debug_stringname) [[unlikely]] {
 			_data->debug_references++;
 		}
 #endif
@@ -409,7 +409,7 @@ StringName::StringName(const String &p_name, bool p_static) {
 	_data->next = _table[idx];
 	_data->prev = nullptr;
 #ifdef DEBUG_ENABLED
-	if (unlikely(debug_stringname)) {
+	if (debug_stringname) [[unlikely]] {
 		// Keep in memory, force static.
 		_data->refcount.ref();
 		_data->static_count.increment();
@@ -447,7 +447,7 @@ StringName StringName::search(const char *p_name) {
 
 	if (_data && _data->refcount.ref()) {
 #ifdef DEBUG_ENABLED
-		if (unlikely(debug_stringname)) {
+		if (debug_stringname) [[unlikely]] {
 			_data->debug_references++;
 		}
 #endif
@@ -510,7 +510,7 @@ StringName StringName::search(const String &p_name) {
 
 	if (_data && _data->refcount.ref()) {
 #ifdef DEBUG_ENABLED
-		if (unlikely(debug_stringname)) {
+		if (debug_stringname) [[unlikely]] {
 			_data->debug_references++;
 		}
 #endif

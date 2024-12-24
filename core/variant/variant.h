@@ -322,7 +322,7 @@ private:
 	};
 
 	_FORCE_INLINE_ void clear() {
-		if (unlikely(needs_deinit[type])) { // Make it fast for types that don't need deinit.
+		if (needs_deinit[type]) [[unlikely]] { // Make it fast for types that don't need deinit.
 			_clear_internal();
 		}
 		type = NIL;
@@ -871,7 +871,7 @@ public:
 
 	void operator=(const Variant &p_variant); // only this is enough for all the other types
 	void operator=(Variant &&p_variant) {
-		if (unlikely(this == &p_variant)) {
+		if (this == &p_variant) [[unlikely]] {
 			return;
 		}
 		clear();
@@ -891,7 +891,7 @@ public:
 	}
 	_FORCE_INLINE_ Variant() {}
 	_FORCE_INLINE_ ~Variant() {
-		if (unlikely(needs_deinit[type])) { // Make it fast for types that don't need deinit.
+		if (needs_deinit[type]) [[unlikely]] { // Make it fast for types that don't need deinit.
 			_clear_internal();
 		}
 	}
@@ -993,7 +993,7 @@ Callable Callable::bind(VarArgs... p_args) const {
 }
 
 Variant &Array::Iterator::operator*() const {
-	if (unlikely(read_only)) {
+	if (read_only) [[unlikely]] {
 		*read_only = *element_ptr;
 		return *read_only;
 	}
@@ -1001,7 +1001,7 @@ Variant &Array::Iterator::operator*() const {
 }
 
 Variant *Array::Iterator::operator->() const {
-	if (unlikely(read_only)) {
+	if (read_only) [[unlikely]] {
 		*read_only = *element_ptr;
 		return read_only;
 	}
@@ -1019,7 +1019,7 @@ Array::Iterator &Array::Iterator::operator--() {
 }
 
 const Variant &Array::ConstIterator::operator*() const {
-	if (unlikely(read_only)) {
+	if (read_only) [[unlikely]] {
 		*read_only = *element_ptr;
 		return *read_only;
 	}
@@ -1027,7 +1027,7 @@ const Variant &Array::ConstIterator::operator*() const {
 }
 
 const Variant *Array::ConstIterator::operator->() const {
-	if (unlikely(read_only)) {
+	if (read_only) [[unlikely]] {
 		*read_only = *element_ptr;
 		return read_only;
 	}

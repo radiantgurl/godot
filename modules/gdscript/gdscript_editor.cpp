@@ -943,7 +943,7 @@ static void _find_annotation_arguments(const GDScriptParser::AnnotationNode *p_a
 		switch (p_argument) {
 			case 0: {
 				static HashMap<StringName, int64_t> items;
-				if (unlikely(items.is_empty())) {
+				if (items.is_empty()) [[unlikely]] {
 					CoreConstants::get_enum_values(SNAME("PropertyHint"), &items);
 				}
 				for (const KeyValue<StringName, int64_t> &item : items) {
@@ -953,7 +953,7 @@ static void _find_annotation_arguments(const GDScriptParser::AnnotationNode *p_a
 			} break;
 			case 2: {
 				static HashMap<StringName, int64_t> items;
-				if (unlikely(items.is_empty())) {
+				if (items.is_empty()) [[unlikely]] {
 					CoreConstants::get_enum_values(SNAME("PropertyUsageFlags"), &items);
 				}
 				for (const KeyValue<StringName, int64_t> &item : items) {
@@ -1665,7 +1665,7 @@ static bool _guess_expression_type(GDScriptParser::CompletionContext &p_context,
 
 	static int recursion_depth = 0;
 	RecursionCheck recursion(&recursion_depth);
-	if (unlikely(recursion.check())) {
+	if (recursion.check()) [[unlikely]] {
 		ERR_FAIL_V_MSG(false, "Reached recursion limit while trying to guess type.");
 	}
 
@@ -2150,7 +2150,7 @@ static bool _guess_expression_type(GDScriptParser::CompletionContext &p_context,
 static bool _guess_identifier_type(GDScriptParser::CompletionContext &p_context, const GDScriptParser::IdentifierNode *p_identifier, GDScriptCompletionIdentifier &r_type) {
 	static int recursion_depth = 0;
 	RecursionCheck recursion(&recursion_depth);
-	if (unlikely(recursion.check())) {
+	if (recursion.check()) [[unlikely]] {
 		ERR_FAIL_V_MSG(false, "Reached recursion limit while trying to guess type.");
 	}
 
@@ -2393,7 +2393,7 @@ static bool _guess_identifier_type(GDScriptParser::CompletionContext &p_context,
 static bool _guess_identifier_type_from_base(GDScriptParser::CompletionContext &p_context, const GDScriptCompletionIdentifier &p_base, const StringName &p_identifier, GDScriptCompletionIdentifier &r_type) {
 	static int recursion_depth = 0;
 	RecursionCheck recursion(&recursion_depth);
-	if (unlikely(recursion.check())) {
+	if (recursion.check()) [[unlikely]] {
 		ERR_FAIL_V_MSG(false, "Reached recursion limit while trying to guess type.");
 	}
 
@@ -2616,7 +2616,7 @@ static void _find_last_return_in_block(GDScriptParser::CompletionContext &p_cont
 static bool _guess_method_return_type_from_base(GDScriptParser::CompletionContext &p_context, const GDScriptCompletionIdentifier &p_base, const StringName &p_method, GDScriptCompletionIdentifier &r_type) {
 	static int recursion_depth = 0;
 	RecursionCheck recursion(&recursion_depth);
-	if (unlikely(recursion.check())) {
+	if (recursion.check()) [[unlikely]] {
 		ERR_FAIL_V_MSG(false, "Reached recursion limit while trying to guess type.");
 	}
 

@@ -13,7 +13,7 @@ proto = """#define GDVIRTUAL$VER($RET m_name $ARG)\\
 				return true;\\
 			}\\
 		}\\
-		if (unlikely(_get_extension() && !_gdvirtual_##m_name##_initialized)) {\\
+		if (_get_extension() && !_gdvirtual_##m_name##_initialized) [[unlikely]] {\\
 			_gdvirtual_##m_name = nullptr;\\
 			if (_get_extension()->get_virtual_call_data && _get_extension()->call_virtual_with_data) {\\
 				_gdvirtual_##m_name = _get_extension()->get_virtual_call_data(_get_extension()->class_userdata, &_gdvirtual_##m_name##_sn);\\
@@ -44,7 +44,7 @@ proto = """#define GDVIRTUAL$VER($RET m_name $ARG)\\
 		if (_script_instance && _script_instance->has_method(_gdvirtual_##m_name##_sn)) {\\
 			return true;\\
 		}\\
-		if (unlikely(_get_extension() && !_gdvirtual_##m_name##_initialized)) {\\
+		if (_get_extension() && !_gdvirtual_##m_name##_initialized) [[unlikely]] {\\
 			_gdvirtual_##m_name = nullptr;\\
 			if (_get_extension()->get_virtual_call_data && _get_extension()->call_virtual_with_data) {\\
 				_gdvirtual_##m_name = _get_extension()->get_virtual_call_data(_get_extension()->class_userdata, &_gdvirtual_##m_name##_sn);\\
