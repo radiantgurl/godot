@@ -479,7 +479,7 @@ class RendererCanvasRenderRD : public RendererCanvasRender {
 	static void _before_evict(RendererCanvasRenderRD::RIDSetKey &p_key, RID &p_rid);
 	static void _uniform_set_invalidation_callback(void *p_userdata);
 
-	typedef LRUCache<RIDSetKey, RID, HashableHasher<RIDSetKey>, HashMapComparatorDefault<RIDSetKey>, _before_evict> RIDCache;
+	typedef LRUCache<RIDSetKey, RID, HashMapHasherDefault, HashMapComparatorDefault<RIDSetKey>, _before_evict> RIDCache;
 	RIDCache rid_set_to_uniform_set;
 
 	struct Batch {
@@ -514,7 +514,7 @@ class RendererCanvasRenderRD : public RendererCanvasRender {
 		uint32_t flags = 0;
 	};
 
-	HashMap<TextureState, TextureInfo, HashableHasher<TextureState>> texture_info_map;
+	HashMap<TextureState, TextureInfo> texture_info_map;
 
 	// per-frame buffers
 	struct DataBuffer {
