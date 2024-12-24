@@ -591,7 +591,6 @@ struct Glyph {
 	int32_t index = 0; // Glyph index (font specific) or UTF-32 codepoint (for the invalid glyphs).
 
 	bool operator==(const Glyph &p_a) const;
-	bool operator!=(const Glyph &p_a) const;
 
 	bool operator<(const Glyph &p_a) const;
 	bool operator>(const Glyph &p_a) const;
